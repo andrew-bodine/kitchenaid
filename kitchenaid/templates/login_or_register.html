@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<div class="container">
+	<div class="row">
+		<div class="span6 offset6">
+			<form method="post" action="/registration/" class="form_signin">
+				{% csrf_token %}
+
+				<h2 class="form-signin-heading">Register Now</h2>
+				<h4>it's too easy.</h4>
+				{{ registration_form.non_field_errors }}
+				<div class="controls controls-row">
+					{{ registration_form.first_name }}
+					{{ registration_form.last_name }}</br>
+				</div>
+				{{ registration_form.email }}</br>
+				{{ registration_form.password }}</br>
+				{{ registration_form.password_again }}</br>
+				<button class="btn btn-large btn-primary" type="submit">Register</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

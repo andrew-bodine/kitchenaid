@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	{% load static %}
+
+	<head>
+		<meta charset="utf-8">
+		<title>kitchenaid</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-responsive.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/kitchenaid.css' %}">
+	</head>
+	<body>
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#">kitchenaid</a>
+				<ul class="nav">
+					{% block nav_links %}
+					{% endblock %}
+				</ul>
+				
+				{% if user.is_authenticated %}
+					<form class="navbar-form pull-right" method="post" action="/logout/">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-primary">log out</button>
+					</form>
+				{% else %}
+					<form class="navbar-form pull-right" method="post" action="/login/">
+						{% csrf_token %}
+						{{ login_form.email }}
+						{{ login_form.password }}
+						<button type="submit" class="btn btn-success">log in</button>
+					</form>
+				{% endif %}
+			</div>
+		</div>
+
+		{% block main_content %}
+		{% endblock %}
+
+	</body>
+</html>
