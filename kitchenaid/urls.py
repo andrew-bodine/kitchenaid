@@ -8,6 +8,7 @@ urlpatterns = patterns( '',
 	url( r'^$', controllers.gate_keeper ),
 	url( r'^login/$', controllers.login_foodie ),
 	url( r'^logout/$', controllers.logout_foodie ),
+	url( r'^registration/$', controllers.register_foodie ),
     	url( r'^admin/', include( admin.site.urls ) ),
 
 	# Uncomment the admin/doc line below to enable admin documentation:

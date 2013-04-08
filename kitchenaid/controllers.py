@@ -17,6 +17,27 @@ def gate_keeper( request ):
 			to_pass.update( { 'login_form': login_form, 'registration_form': registration_form } )
 			return render_to_response( 'login_or_register.html', to_pass, context_instance=RequestContext( request ) )
 
+def register_foodie( request ):
+	if not request.user.is_authenticated( ):
+		if request.method == 'POST':
+			registration_form = FoodieRegistrationForm( request.POST )
+
+			if registration_form.is_valid( ):
+				if request.POST[ 'password' ] == request.POST[ 'password_again' ]:
+					###############
+					pass
+				else:
+					to_pass = csrf( request )
+					registration_form.errors.update( { 'password': 'passwords do not match' } )
+					to_pass.update( { 'registration_form': registration_form } )
+					to_pass.update( { 'login_form': FoodieCredentialsForm( ) } )
+					return render_to_response( 'login_or_register.html', to_pass, context_instance=RequestContext( request ) )
+			else:
+				to_pass = csrf( request )
+				to_pass.update( { 'registration_form': registration_form } )
+				to_pass.update( { 'login_form': FoodieCredentialsForm( ) } )
+				return render_to_response( 'login_or_register.html', to_pass, context_instance=RequestContext( request ) )
+
 def login_foodie( request ):
 	
 	if not request.user.is_authenticated( ):

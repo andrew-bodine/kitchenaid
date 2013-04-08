@@ -9,15 +9,43 @@
 
 				<h2 class="form-signin-heading">Register Now</h2>
 				<h4>it's too easy.</h4>
-				{{ registration_form.non_field_errors }}
-				<div class="controls controls-row">
-					{{ registration_form.first_name }}
-					{{ registration_form.last_name }}</br>
+				
+				<!-- names -->
+				{% if registration_form.first_name.errors or registration_form.last_name.errors %}
+				<div class="control-group error">
+				{% else %}
+				<div class="control-group">
+				{% endif %}
+					<div class="controls controls-row">
+						{{ registration_form.first_name }}
+						{{ registration_form.last_name }}
+					</div>
 				</div>
-				{{ registration_form.email }}</br>
-				{{ registration_form.password }}</br>
-				{{ registration_form.password_again }}</br>
-				<button class="btn btn-large btn-primary" type="submit">Register</button>
+
+				<!-- email -->
+				{% if registration_form.email.errors %}
+				<div class="control-group error">
+				{% else %}
+				<div class="control-group">
+				{% endif %}
+					<div class="controls">
+						{{ registration_form.email }}
+					</div>
+				</div>
+
+				<!-- passwords -->
+				{% if registration_form.password.errors or registration_form.password_again.errors %}
+				<div class="control-group error">
+				{% else %}
+				<div class="control-group">
+				{% endif %}
+					<div class="controls controls-row">
+						{{ registration_form.password }}
+						{{ registration_form.password_again }}
+					</div>
+				</div>
+
+				<button class="btn btn-large btn-block btn-primary" type="submit">Register</button>
 			</form>
 		</div>
 	</div>
