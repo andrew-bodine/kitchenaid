@@ -3,12 +3,16 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
+from django.contrib.auth.models import User
+from models import *
 from forms import *
 
 def gate_keeper( request ):
 
 	if request.user.is_authenticated( ):
-		return render_to_response( 'pantry.html', { }, context_instance=RequestContext( request ) )
+		# TODO: redirect to a 'home'
+		#return render_to_response( 'pantry.html', { }, context_instance=RequestContext( request ) )
+		return HttpResponseRedirect( '/pantry/' )
 	else:
 		if request.method == 'GET':
 			to_pass = csrf( request )
@@ -17,6 +21,7 @@ def gate_keeper( request ):
 			to_pass.update( { 'login_form': login_form, 'registration_form': registration_form } )
 			return render_to_response( 'login_or_register.html', to_pass, context_instance=RequestContext( request ) )
 
+# TODO: implement account email activations later
 def register_foodie( request ):
 	if not request.user.is_authenticated( ):
 		if request.method == 'POST':
@@ -24,8 +29,35 @@ def register_foodie( request ):
 
 			if registration_form.is_valid( ):
 				if request.POST[ 'password' ] == request.POST[ 'password_again' ]:
-					###############
-					pass
+					try:
+						# create django user
+						account = User( username=request.POST[ 'email' ], first_name=request.POST[ 'first_name' ],
+								last_name=request.POST[ 'last_name' ], email=request.POST[ 'email' ] )
+						account.set_password( request.POST[ 'password' ] )
+						# set account inactive
+						account.save( )
+
+						# create kitchenaid user
+						foodie = Foodie( )
+						foodie.django_user = account
+						foodie.save( )
+
+						# create pending activation
+						# send activation email
+
+						# authenticate/login new foodie
+						user = authenticate( username=request.POST[ 'email' ], password=request.POST[ 'password' ] )
+						login( request, user )
+
+						# TODO: redirect to pantry management
+						return HttpResponseRedirect( '/' )
+
+					except BaseException:
+						to_pass = csrf( request )
+						registration_form.errors.update( { 'email': 'account already registered with that email' } )
+						to_pass.update( { 'registration_form': registration_form } )
+						to_pass.update( { 'login_form': FoodieCredentialsForm( ) } )
+						return render_to_response( 'login_or_register.html', to_pass, context_instance=RequestContext( request ) )
 				else:
 					to_pass = csrf( request )
 					registration_form.errors.update( { 'password': 'passwords do not match' } )

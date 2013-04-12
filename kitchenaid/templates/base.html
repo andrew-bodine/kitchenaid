@@ -8,9 +8,16 @@
 		<title>kitchenaid</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-responsive.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/kitchenaid.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-responsive.min.css' %}">
+		{% block stylesheets %}
+		{% endblock %}
+
+		<script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+		<script type="text/javascript">
+			{% block javascripts %}
+			{% endblock %}
+		</script>
 	</head>
 	<body>
 
@@ -41,5 +48,7 @@
 		{% block main_content %}
 		{% endblock %}
 
+		{% block scripts %}
+		{% endblock %}
 	</body>
 </html>

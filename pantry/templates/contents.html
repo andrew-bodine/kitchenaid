@@ -1,0 +1,18 @@
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th>Unit</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in contents %}
+		<tr>
+			<td>{{ item.name }}</td>
+			<td>{{ item.amount }}</td>
+			<td>{{ item.unit }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
