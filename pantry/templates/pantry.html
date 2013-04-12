@@ -1,57 +1,21 @@
 {% extends 'base.html' %}
 
+<!-- navigations -->
 {% block nav_links %}
 <li class="active"><a href="#">Pantry</a></li>
 <li><a href="#">Cookbook</a></li>
 {% endblock %}
 
-{% block javascripts %}
-$( document ).ready( function( ) {
-	update_contents( );
-	$( "#btn_add_pantry_item" ).click( function( ) {
-		$.ajax( {
-			type: "GET",
-			url: "/pantry/item/",
-			success: function( result ) {
-				$( "#edit_pantry_item_container" ).html( result );
-			}
-		} );
-	} );
-} ).on( 'submit', "#form_edit_pantry_item", function( event ) {
-	event.preventDefault( );
-	$.post( 
-		'/pantry/item/',
-		$( "#form_edit_pantry_item" ).serialize( ),
-		function( data ) {
-			$( "#edit_pantry_item_container" ).html( data );
-			update_contents( );
-		}, 
-		"html" 
-	);
-} );
-function update_contents( ) {
-	$.ajax( {
-		type: "GET",
-		url: "/pantry/contents/",
-		success: function( result ) {
-			$( "#pantry_contents_container" ).html( result );
-		}
-	} );
-}
-{% endblock %}
-
-{% block main_content %}
-<!--
-<form class="form-search">
-	<div class="input-append">
-		<input type="text" class="span2 search-query"/>
-		<button type="submit" class="btn btn-success">Search</button>
-	</div>
-</form>
--->
-
+<!-- main contents -->
+{% block main_contents %}
 <button id="btn_add_pantry_item" class="btn btn-warning span2">Add Pantry Item</button>
 
 <div id="edit_pantry_item_container" class="container span6"></div>
 <div id="pantry_contents_container" class="container span6">pantry contents</div>
+{% endblock %}
+
+<!-- javascripts -->
+{% block javascripts %}
+{% load static %}
+<script src="{% static 'js/pantry.js' %}"></script>
 {% endblock %}
