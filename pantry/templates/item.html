@@ -1,4 +1,4 @@
-<form method="post" id="form_edit_pantry_item">
+<form method="post" id="form_edit_pantry_item" value="{{ item_id }}">
 	{% csrf_token %}
 	{% for field in form %}
 	{{ field.errors }}
@@ -7,5 +7,9 @@
 
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Save</button>
+		{% if item_id %}
+		<button id="btn_delete_item" type="button" class="btn btn-danger">Delete</button>
+		{% endif %}
+		<button id="btn_cancel_item_edit" type="button" class="btn btn-inverse">Cancel</button>
 	</div>
 </form>
