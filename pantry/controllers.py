@@ -35,6 +35,8 @@ def item( request, item_id=None ):
 		else:
 			to_pass = csrf( request )
 			to_pass.update( { 'form': form } )
+			if not item_id is None:
+				to_pass.update( { 'item_id': item_id } )
 			return render_to_response( 'item.html', to_pass, context_instance=RequestContext( request ) )
 	else:
 		to_pass = csrf( request )
@@ -69,4 +71,4 @@ def contents( request ):
 		return HttpResponseRedirect( '/' )
 
 	to_pass = { 'contents': request.user.pantryitem_set.all( ) }
-	return render_to_response( 'contents.html', to_pass, context_instance=RequestContext( request ) )
+	return render_to_response( 'pantry_contents.html', to_pass, context_instance=RequestContext( request ) )

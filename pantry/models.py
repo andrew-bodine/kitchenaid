@@ -3,6 +3,7 @@ from django.db import models
 
 # choices
 units = (
+	( '', 'Units' ),
 	( 'tbsp', 'tablespoon' ),
 	( 'tsp', 'teaspoon' ),
 	( 'c', 'cup' ),
@@ -22,9 +23,9 @@ units = (
 class PantryItem( models.Model ):
 
 	# metadatas
-	name = models.CharField( max_length=50, unique=True )
+	name = models.CharField( max_length=50 )
 	amount = models.DecimalField( max_digits=7, decimal_places=4 )
-	unit = models.CharField( max_length=5, choices=units )
+	unit = models.CharField( max_length=5, choices=units, default='', blank=False )
 
 	# relations
 	django_user = models.ForeignKey( User )

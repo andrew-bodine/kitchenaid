@@ -10,8 +10,6 @@ from forms import *
 def gate_keeper( request ):
 
 	if request.user.is_authenticated( ):
-		# TODO: redirect to a 'home'
-		#return render_to_response( 'pantry.html', { }, context_instance=RequestContext( request ) )
 		return HttpResponseRedirect( '/pantry/' )
 	else:
 		if request.method == 'GET':
@@ -49,8 +47,7 @@ def register_foodie( request ):
 						user = authenticate( username=request.POST[ 'email' ], password=request.POST[ 'password' ] )
 						login( request, user )
 
-						# TODO: redirect to pantry management
-						return HttpResponseRedirect( '/' )
+						return HttpResponseRedirect( '/pantry/' )
 
 					except BaseException:
 						to_pass = csrf( request )

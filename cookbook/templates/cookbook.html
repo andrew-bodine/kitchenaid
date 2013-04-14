@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+<!-- stylesheets -->
+{% block stylesheets %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/timepicker.css' %}">
+{% endblock %}
+
+<!-- navigations -->
+{% block nav_links %}
+<li><a href="/pantry/">Pantry</a></li>
+<li class="active"><a href="/cookbook/">Cookbook</a></li>
+{% endblock %}
+	
+<!-- main contents -->
+{% block main_contents %}
+<div class="container">
+	<div class="row">
+		<div class="input-prepend span8 offset2">
+			<button id="btn_search_recipes" class="btn btn-inverse span1"><i class="icon-search icon-white"></i></button>
+			<input class="span4" type="text"/>
+			<select class="span2">
+				<option>Name</option>
+				<option>Ingredient</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="btn-group span8 offset2">
+			<button id="btn_add_recipe" class="btn btn-success"><i class="icon-plus"></i></button>
+		</div>
+	</div>
+	<div class="row">
+		<div id="edit_recipe_container" class="span8 offset2"></div>
+	</div>
+	<div class="row">
+		<div id="cookbook_contents_container" class="span8 offset2">
+	</div>
+</div>
+{% endblock %}
+
+<!-- javascripts -->
+{% block javascripts %}
+{% load static %}
+<script src="{% static 'js/cookbook.js' %}"></script>
+<script src="{% static 'js/timepicker.js' %}"></script>
+<script src="{% static 'js/jquery.ui.core.min.js' %}"></script>
+{% endblock %}

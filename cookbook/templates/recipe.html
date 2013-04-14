@@ -1,0 +1,32 @@
+<form method="post" id="form_edit_recipe" value="{{ recipe_id }}">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Recipe Metadata</legend>
+		{{ recipe_form.name }}
+		{{ recipe_form.preparation_time }}
+		{{ recipe_form.difficulty }}
+		{{ recipe_form.meal_time }}
+		{{ recipe_form.is_healthy.label }}: {{ recipe_form.is_healthy }}
+	</fieldset>
+
+	<fieldset>
+		<legend>Recipe Instructions</legend>
+		{% if recipe_id %}
+		{{ recipe_form.directions }}
+		{% endif %}
+	</fieldset>
+</form>
+<fieldset>
+	<legend>Recipe Ingredients</legend>
+	<div id="ingredients_container"></div>
+</fieldset>
+
+<div class="btn-group">
+	{% if recipe_id %}
+	<button id="btn_submit_recipe_form" class="btn btn-primary">Save</button>
+	<button id="btn_delete_recipe" class="btn btn-danger">Delete</button>
+	{% else %}
+	<button id="btn_add_ingredients" class="btn btn-primary">Add Ingredients</button>
+	{% endif %}
+	<button id="btn_cancel_recipe_edit" class="btn btn-inverse">Cancel</button>
+</div></br></br>

@@ -2,17 +2,26 @@
 
 <!-- navigations -->
 {% block nav_links %}
-<li class="active"><a href="#">Pantry</a></li>
-<li><a href="#">Cookbook</a></li>
+<li class="active"><a href="/pantry/">Pantry</a></li>
+<li><a href="/cookbook/">Cookbook</a></li>
 {% endblock %}
 
 <!-- main contents -->
 {% block main_contents %}
-<button id="btn_add_pantry_item" class="btn btn-warning span2">Add Pantry Item</button>
-
-<div id="edit_pantry_item_container" class="container span6"></div>
-
-<div id="pantry_contents_container" class="container span6"></div>
+<div class="container">
+	<div class="row">
+		<div class="btn-group span8 offset2">
+			<button id="btn_add_pantry_item" class="btn btn-success"><i class="icon-plus"></i></button>
+			<button id="btn_update_pantry" class="btn btn-info"><i class="icon-edit"></i></button>
+		</div>
+	</div>
+	<div class="row">
+		<div id="edit_pantry_item_container" class="span8 offset2"></div>
+	</div>
+	<div class="row">
+		<div id="pantry_contents_container" class="span8 offset2"></div>
+	</div>
+</div>
 {% endblock %}
 
 <!-- javascripts -->

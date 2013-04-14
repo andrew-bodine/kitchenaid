@@ -21,7 +21,7 @@
 		<!-- navigations -->
 		<div class="navbar">
 			<div class="navbar-inner">
-				<a class="brand" href="#">kitchenaid</a>
+				<a class="brand" href="/">kitchenaid</a>
 				<ul class="nav">
 					{% block nav_links %}
 					{% endblock %}
@@ -30,7 +30,7 @@
 				{% if user.is_authenticated %}
 					<form class="navbar-form pull-right" method="post" action="/logout/">
 						{% csrf_token %}
-						<button type="submit" class="btn btn-primary">log out</button>
+						<button type="submit" class="btn btn-primary"><i class="icon-off icon-white"></i></button>
 					</form>
 				{% else %}
 					<form class="navbar-form pull-right" method="post" action="/login/">

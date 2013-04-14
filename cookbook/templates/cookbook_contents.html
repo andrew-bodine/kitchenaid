@@ -1,0 +1,22 @@
+<table class="table table-hover table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Cook Time</th>
+			<th>Difficulty</th>
+			<th>Time of Day</th>
+			<th>Healthy</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for recipe in contents %}
+		<tr id="{{ recipe.id }}">
+			<td>{{ recipe.name }}</td>
+			<td>{{ recipe.preparation_time }}</td>
+			<td>{{ recipe.difficulty }}</td>
+			<td>{{ recipe.meal_time }}</td>
+			<td>{{ recipe.is_healthy }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

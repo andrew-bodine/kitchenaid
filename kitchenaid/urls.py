@@ -10,6 +10,7 @@ urlpatterns = patterns( '',
 	url( r'^logout/$', controllers.logout_foodie ),
 	url( r'^registration/$', controllers.register_foodie ),
 	url( r'^', include( 'pantry.urls' ) ),
+	url( r'^', include( 'cookbook.urls' ) ),
     	url( r'^admin/', include( admin.site.urls ) ),
 
 	# Uncomment the admin/doc line below to enable admin documentation:

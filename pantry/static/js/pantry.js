@@ -26,7 +26,9 @@ $( document ).ready( function( ) {
 } ).on( 'click', '#btn_cancel_item_edit', function( ) {
 	$( '#edit_pantry_item_container' ).empty( );
 } ).on( 'click', '#btn_delete_item', function( ) {
-	delete_item( '/pantry/item/delete/' + $( '#form_edit_pantry_item' ).attr( 'value' ) + '/' );
+	var confirmation = confirm( "Delete this item from pantry?" );
+	if( confirmation == true )
+		delete_item( '/pantry/item/delete/' + $( '#form_edit_pantry_item' ).attr( 'value' ) + '/' );
 } );
 function get_pantry( ) {
 	$.ajax( {

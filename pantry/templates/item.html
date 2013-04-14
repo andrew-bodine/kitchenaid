@@ -1,15 +1,13 @@
-<form method="post" id="form_edit_pantry_item" value="{{ item_id }}">
+<form method="post" id="form_edit_pantry_item" value="{{ item_id }}" class="form-inline">
 	{% csrf_token %}
-	{% for field in form %}
-	{{ field.errors }}
-	{{ field.label_tag }}{{ field }}</br>
-	{% endfor %}
+	{{ form.name }}
+	{{ form.amount }}
+	{{ form.unit }}
+	<button type="submit" class="btn btn-inverse"><i class="icon-download icon-white"></i></button>
 
-	<div class="form-actions">
-		<button type="submit" class="btn btn-primary">Save</button>
-		{% if item_id %}
-		<button id="btn_delete_item" type="button" class="btn btn-danger">Delete</button>
-		{% endif %}
-		<button id="btn_cancel_item_edit" type="button" class="btn btn-inverse">Cancel</button>
-	</div>
+	{% if item_id %}
+	<button id="btn_delete_item" class="btn btn-inverse"><i class="icon-trash icon-white"></i></button>
+	{% endif %}
+
+	<button id="btn_cancel_item_edit" class="btn btn-inverse"><i class="icon-remove icon-white"></i></button>
 </form>
