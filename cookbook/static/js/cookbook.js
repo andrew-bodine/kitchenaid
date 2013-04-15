@@ -3,6 +3,13 @@ $( document ).ready( function( ) {
 	$( '#btn_add_recipe' ).click( function( ) {
 		get_recipe( '/cookbook/recipe/' );
 	} );
+	$( '#btn_search_recipes' ).click( function( ) {
+		var data = {
+			'bfilter': $( '#bsearch_filter' ).val( ),
+			'sstring': $( '#bsearch_input' ).val( ),
+		};
+		search_cookbook( data );
+	} );
 } ).on( 'click', '#btn_submit_recipe_form', function( ) {
 	var url = '/cookbook/recipe/';
 
@@ -57,7 +64,6 @@ $( document ).ready( function( ) {
 	);
 } ).on( 'click', '#cookbook_contents_container tr', function( ) {
 	get_recipe( '/cookbook/recipe/' + $( this ).attr( 'id' ) + '/' );
-	//get_ingredients( '/cookbook/ingredient/' + $( this ).attr( 'id' ) + '/' );
 } ).on( 'click', '#btn_cancel_recipe_edit', function( ) {
 	$( '#edit_recipe_container' ).empty( );
 } );
@@ -92,6 +98,16 @@ function get_ingredients( url ) {
 		url: url,
 		success: function( result ) {
 			$( '#ingredients_container' ).html( result );
+		}
+	} );
+}
+function search_cookbook( data ) {
+	$.ajax( {
+		type: 'GET',
+		url: '/cookbook/search/',
+		data: data,
+		success: function( result ) {
+			$( '#cookbook_contents_container' ).html( result );
 		}
 	} );
 }

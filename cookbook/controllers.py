@@ -108,3 +108,24 @@ def contents( request ):
 
 	to_pass = { 'contents': request.user.recipe_set.all( ) }
 	return render_to_response( 'cookbook_contents.html', to_pass, context_instance=RequestContext( request ) )
+
+def search( request ):
+	if not request.user.is_authenticated( ):
+		return HttpResponseRedirect( '/' )
+
+	to_pass = { }
+	try:
+		if request.GET[ 'bfilter' ] == 'Name':
+			if not request.GET[ 'sstring' ] == '':
+				to_pass.update( { 'contents': request.user.recipe_set.filter( name=request.GET[ 'sstring' ] ) } )
+			else:
+				to_pass.update( { 'contents': request.user.recipe_set.all( ) } )
+		elif request.GET[ 'bfilter' ] == 'Ingredient':
+			if not request.GET[ 'sstring' ] == '':
+				to_pass.update( { 'contents': request.user.recipe_set.filter( ingredient__name__contains=request.GET[ 'sstring' ] ) } )
+			else:
+				to_pass.update( { 'contents': request.user.recipe_set.all( ) } )
+	except BaseException:
+		pass
+
+	return render_to_response( 'cookbook_contents.html', to_pass )

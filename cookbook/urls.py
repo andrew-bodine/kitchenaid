@@ -8,4 +8,5 @@ urlpatterns = patterns( '',
 	url( r'^cookbook/recipe/(?P<recipe_id>\d)/$', controllers.recipe ),
 	url( r'^cookbook/recipe/$', controllers.recipe ),
 	url( r'^cookbook/contents/$', controllers.contents ),
+	url( r'^cookbook/search/$', controllers.search ),
 )
