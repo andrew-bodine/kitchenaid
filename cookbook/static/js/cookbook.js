@@ -8,8 +8,35 @@ $( document ).ready( function( ) {
 			'bfilter': $( '#bsearch_filter' ).val( ),
 			'sstring': $( '#bsearch_input' ).val( ),
 		};
+		var temp = $( '#healthy' );
+		if( temp && temp.val( ) != 'Healthy?' ) {
+			$.extend( data, { 'healthy': temp.val( ) } );
+		}
+		temp = $( '#difficulty' );
+		if( temp && temp.val( ) != 'Difficulty?' ) {
+			$.extend( data, { 'difficulty': temp.val( ) } );
+		}
+		temp = $( '#cook_time_hrs' );
+		if( temp && temp.val( ) != '' ) {
+			$.extend( data, { 'hrs': temp.val( ) } );
+		}
+		temp = $( '#cook_time_mins' );
+		if( temp && temp.val( ) != '' ) {
+			$.extend( data, { 'mins': temp.val( ) } );
+		}
 		search_cookbook( data );
 	} );
+	$( '#btn_advanced_search' ).click( function( ) {
+		$.ajax( {
+			type: 'GET',
+			url: '/cookbook/advanced_search/',
+			success: function( result ) {
+				$( '#advanced_search_container' ).html( result );
+			}
+		} );
+	} );
+} ).on( 'click', '#btn_cancel_advanced_search', function( ) {
+	$( '#advanced_search_container' ).empty( );
 } ).on( 'click', '#btn_submit_recipe_form', function( ) {
 	var url = '/cookbook/recipe/';
 
@@ -73,9 +100,6 @@ function get_recipe( url ) {
 		url: url,
 		success: function( result ) {
 			$( '#edit_recipe_container' ).html( result );
-			$( '#id_preparation_time' ).timepicker( {
-				showPeriodLabels: false,
-			} );
 			append = $( '#form_edit_recipe' ).attr( 'value' );
 			if( append ) {
 				get_ingredients( '/cookbook/ingredient/' + append + '/' );

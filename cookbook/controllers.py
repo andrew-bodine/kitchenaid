@@ -113,19 +113,38 @@ def search( request ):
 	if not request.user.is_authenticated( ):
 		return HttpResponseRedirect( '/' )
 
-	to_pass = { }
 	try:
 		if request.GET[ 'bfilter' ] == 'Name':
 			if not request.GET[ 'sstring' ] == '':
-				to_pass.update( { 'contents': request.user.recipe_set.filter( name=request.GET[ 'sstring' ] ) } )
+				recipes = request.user.recipe_set.filter( name=request.GET[ 'sstring' ] )
 			else:
-				to_pass.update( { 'contents': request.user.recipe_set.all( ) } )
+				recipes = request.user.recipe_set.all( )
 		elif request.GET[ 'bfilter' ] == 'Ingredient':
 			if not request.GET[ 'sstring' ] == '':
-				to_pass.update( { 'contents': request.user.recipe_set.filter( ingredient__name__contains=request.GET[ 'sstring' ] ) } )
+				recipes = request.user.recipe_set.filter( ingredient__name__contains=request.GET[ 'sstring' ] )
 			else:
-				to_pass.update( { 'contents': request.user.recipe_set.all( ) } )
+				recipes = request.user.recipe_set.all( )
+		if 'healthy' in request.GET:
+			if request.GET[ 'healthy' ] == 'Yes':
+				recipes = recipes.filter( is_healthy=True )
+			elif request.GET[ 'healthy' ] == 'No':
+				recipes = recipes.filter( is_healthy=False )
+		if 'difficulty' in request.GET:
+			recipes = recipes.filter( difficulty=request.GET[ 'difficulty' ] )
+		if 'hrs' in request.GET:
+			if 'mins' in request.GET:
+				recipes = recipes.filter( preparation_hours__lte=request.GET[ 'hrs' ], preparation_minutes__lte=request.GET[ 'mins' ] )
+			else:
+				recipes = recipes.filter( preparation_hours__lt=request.GET[ 'hrs' ] )
+		elif 'mins' in request.GET:
+			recipes = recipes.filter( preparation_hours=0, preparation_minutes__lte=request.GET[ 'mins' ] )
 	except BaseException:
 		pass
 
+	to_pass = { 'contents': recipes }
 	return render_to_response( 'cookbook_contents.html', to_pass )
+
+def advanced( request ):
+	if not request.user.is_authenticated( ):
+		return HttpResponseRedirect( '/' )
+	return render_to_response( 'advanced_search.html' )

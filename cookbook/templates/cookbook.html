@@ -1,11 +1,5 @@
 {% extends 'base.html' %}
 
-<!-- stylesheets -->
-{% block stylesheets %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/timepicker.css' %}">
-{% endblock %}
-
 <!-- navigations -->
 {% block nav_links %}
 <li><a href="/pantry/">Pantry</a></li>
@@ -16,14 +10,24 @@
 {% block main_contents %}
 <div class="container">
 	<div class="row">
-		<div class="input-prepend span8 offset2">
-			<button id="btn_search_recipes" class="btn btn-inverse span1"><i class="icon-search icon-white"></i></button>
-			<input id="bsearch_input" class="span4" type="text"/>
-			<select id="bsearch_filter" class="span2">
-				<option>Name</option>
-				<option>Ingredient</option>
-			</select>
+		<div class="span7 offset2">
+			<div class="input-prepend input-append">
+				<button id="btn_search_recipes" class="btn btn-inverse span1">
+					<i class="icon-search icon-white"></i>
+				</button>
+				<input id="bsearch_input" class="span4" type="text"/>
+				<select id="bsearch_filter" class="span2">
+					<option>Name</option>
+					<option>Ingredient</option>
+				</select>
+			</div>
 		</div>
+		<button id="btn_advanced_search" class="btn btn-inverse span1">
+			<i class="icon-chevron-down icon-white"></i>
+		</button>
+	</div>
+	<div class="row">
+		<div id="advanced_search_container" class="span8 offset2"></div>
 	</div>
 	<div class="row">
 		<div class="btn-group span8 offset2">
@@ -43,6 +47,4 @@
 {% block javascripts %}
 {% load static %}
 <script src="{% static 'js/cookbook.js' %}"></script>
-<script src="{% static 'js/timepicker.js' %}"></script>
-<script src="{% static 'js/jquery.ui.core.min.js' %}"></script>
 {% endblock %}

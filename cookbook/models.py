@@ -21,7 +21,8 @@ class Recipe( models.Model ):
 
 	# metadatas
 	name = models.CharField( max_length=256 )
-	preparation_time = models.TimeField( )
+	preparation_hours = models.IntegerField( max_length=2 )
+	preparation_minutes = models.IntegerField( max_length=2 )
 	difficulty = models.CharField( max_length=6, choices=difficulties, default='', blank=False )
 	is_healthy = models.BooleanField( )
 	meal_time = models.CharField( max_length=9, choices=meals, default='', blank=False )

@@ -3,9 +3,11 @@
 	<fieldset>
 		<legend>Recipe Metadata</legend>
 		{{ recipe_form.name }}
-		{{ recipe_form.preparation_time }}
 		{{ recipe_form.difficulty }}
 		{{ recipe_form.meal_time }}
+		Prep time:
+		{{ recipe_form.preparation_hours }}
+		{{ recipe_form.preparation_minutes }}
 		{{ recipe_form.is_healthy.label }}: {{ recipe_form.is_healthy }}
 	</fieldset>
 

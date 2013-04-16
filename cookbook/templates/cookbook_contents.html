@@ -12,7 +12,7 @@
 		{% for recipe in contents %}
 		<tr id="{{ recipe.id }}">
 			<td>{{ recipe.name }}</td>
-			<td>{{ recipe.preparation_time }}</td>
+			<td>{{ recipe.preparation_hours }}:{{ recipe.preparation_minutes }}</td>
 			<td>{{ recipe.difficulty }}</td>
 			<td>{{ recipe.meal_time }}</td>
 			<td>{{ recipe.is_healthy }}</td>

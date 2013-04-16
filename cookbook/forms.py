@@ -8,9 +8,10 @@ class RecipeForm( forms.ModelForm ):
 		exclude = [ 'django_user' ]
 		widgets = {
 			'name': forms.TextInput( attrs={ 'placeholder': 'Recipe Name', 'class': 'span4' } ),
-			'preparation_time': forms.TextInput( attrs={ 'placeholder': 'Preparation Time', 'class': 'span2' } ),
 			'difficulty': forms.Select( attrs={ 'class': 'span2' } ),
 			'meal_time': forms.Select( attrs={ 'class': 'span2' } ),
+			'preparation_hours': forms.TextInput( attrs={ 'placeholder': 'Hours', 'class': 'span1' } ),
+			'preparation_minutes': forms.TextInput( attrs={ 'placeholder': 'Minutes', 'class': 'span1' } ),
 			'directions': forms.Textarea( attrs={ 'placeholder': 'Recipe Instructions', 'class': 'span8' } ),
 		}
 
