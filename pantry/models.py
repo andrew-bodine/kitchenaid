@@ -13,10 +13,6 @@ units = (
 	( 'gal', 'gallon' ),
 	( 'oz', 'ounces' ),
 	( 'lb', 'pound' ),
-	( 'ml', 'milimeter' ),
-	( 'cc', 'cubic centimeters' ),
-	( 'in', 'inch' ),
-	( 'cm', 'centimeters' ),
 	( 'whole', 'whole item' ),
 )
 

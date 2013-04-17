@@ -148,3 +148,8 @@ def advanced( request ):
 	if not request.user.is_authenticated( ):
 		return HttpResponseRedirect( '/' )
 	return render_to_response( 'advanced_search.html' )
+
+def fio_forme( request ):
+	if not request.user.is_authenticated( ):
+		return HttpResponseRedirect( '/' )
+	return render_to_response( 'cookbook_contents.html' )

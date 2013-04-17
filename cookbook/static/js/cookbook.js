@@ -35,6 +35,15 @@ $( document ).ready( function( ) {
 			}
 		} );
 	} );
+	$( '#btn_fio_forme' ).click( function( ) {
+		$.ajax( {
+			type: 'GET',
+			url: '/cookbook/fio_forme/',
+			success: function( result ) {
+				$( '#cookbook_contents_container' ).html( result );
+			}
+		} );
+	} );
 } ).on( 'click', '#btn_cancel_advanced_search', function( ) {
 	$( '#advanced_search_container' ).empty( );
 } ).on( 'click', '#btn_submit_recipe_form', function( ) {

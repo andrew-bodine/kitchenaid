@@ -10,4 +10,5 @@ urlpatterns = patterns( '',
 	url( r'^cookbook/contents/$', controllers.contents ),
 	url( r'^cookbook/search/$', controllers.search ),
 	url( r'^cookbook/advanced_search/$', controllers.advanced ),
+	url( r'^cookbook/fio_forme/', controllers.fio_forme ),
 )
