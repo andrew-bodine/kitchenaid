@@ -1,0 +1,16 @@
+<form id="edit_shopping">
+	{% csrf_token %}
+	{% for item in items %}
+	<div class="control-group">
+		<strong class="text-success">{{ item.name }}:</strong>
+		<input class="span1" type="text" id="{{ item.id }}" value="{{ item.amount }}"/>
+		<select class="span1" id="{{ item.id }}">
+			{% for key, option in units %}
+			<option>{{ key }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	{% endfor %}
+	<button type="button" class="btn btn-inverse" id="btn_commit_shopping">Update Pantry</button>
+	<button type="button" class="btn btn-error" id="btn_cancel">Cancel</button>
+</form>

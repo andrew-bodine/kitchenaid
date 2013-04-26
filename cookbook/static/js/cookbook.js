@@ -1,5 +1,6 @@
 $( document ).ready( function( ) {
 	get_cookbook( );
+	get_shopping_list( );
 	$( '#btn_add_recipe' ).click( function( ) {
 		get_recipe( '/cookbook/recipe/' );
 	} );
@@ -41,6 +42,25 @@ $( document ).ready( function( ) {
 			url: '/cookbook/fio_forme/',
 			success: function( result ) {
 				$( '#cookbook_contents_container' ).html( result );
+			}
+		} );
+	} );
+	$( '#btn_addto_shopping' ).click( function( ) {
+		var data = { };
+		var itr = 0;
+		$( 'input:checkbox' ).each( function( ) {
+			if( $( this ).is( ':checked' ) ) {
+				data[ itr ] = $( this ).attr( 'value' );
+				itr = itr + 1;
+			}
+		} );
+
+		$.ajax( {
+			type: 'GET',
+			data: data,
+			url: '/pantry/shopping/gen/',
+			success: function( ) {
+				get_shopping_list( );
 			}
 		} );
 	} );
@@ -100,6 +120,8 @@ $( document ).ready( function( ) {
 	);
 } ).on( 'click', '#cookbook_contents_container tr', function( ) {
 	get_recipe( '/cookbook/recipe/' + $( this ).attr( 'id' ) + '/' );
+} ).on( 'click', ':checkbox', function( event ) {
+	event.stopPropagation( );
 } ).on( 'click', '#btn_cancel_recipe_edit', function( ) {
 	$( '#edit_recipe_container' ).empty( );
 } );
@@ -141,6 +163,15 @@ function search_cookbook( data ) {
 		data: data,
 		success: function( result ) {
 			$( '#cookbook_contents_container' ).html( result );
+		}
+	} );
+}
+function get_shopping_list( ) {
+	$.ajax( {
+		type: 'GET',
+		url: '/pantry/shopping/',
+		success: function( result ) {
+			$( '#shopping_list_container' ).html( result );
 		}
 	} );
 }

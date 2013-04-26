@@ -10,16 +10,17 @@
 {% block main_contents %}
 <div class="container">
 	<div class="row">
-		<div class="btn-group span8 offset2">
-			<button id="btn_add_pantry_item" class="btn btn-success"><i class="icon-plus"></i></button>
-			<button id="btn_update_pantry" class="btn btn-info"><i class="icon-edit"></i></button>
+		<div class="btn-group span8 offset4">
+			<button id="btn_add_pantry_item" class="btn btn-success">Add Item <i class="icon-plus"></i></button>
+			<button id="btn_checkin_shopping" class="btn btn-warning">Checkin Shopping List <i class="icon-ok"></i></button>
 		</div>
 	</div>
 	<div class="row">
-		<div id="edit_pantry_item_container" class="span8 offset2"></div>
+		<div id="edit_pantry_item_container" class="span8 offset4"></div>
 	</div>
 	<div class="row">
-		<div id="pantry_contents_container" class="span8 offset2"></div>
+		<div id="shopping_list_container" class="span4"></div>
+		<div id="pantry_contents_container" class="span8"></div>
 	</div>
 </div>
 {% endblock %}

@@ -11,3 +11,8 @@ class PantryItemForm( forms.ModelForm ):
 				'amount': forms.TextInput( attrs={ 'placeholder': 'Quantity', 'class': 'span2' } ),
 				'unit': forms.Select( attrs={ 'class': 'span2' } ),
 		}
+class ShoppingListForm( forms.ModelForm ):
+	
+	class Meta:
+		model = ShoppingList
+		exclude = [ 'django_user' ]

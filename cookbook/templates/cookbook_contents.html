@@ -6,16 +6,18 @@
 			<th>Difficulty</th>
 			<th>Time of Day</th>
 			<th>Healthy</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for recipe in contents %}
 		<tr id="{{ recipe.id }}">
 			<td>{{ recipe.name }}</td>
-			<td>{{ recipe.preparation_hours }}:{{ recipe.preparation_minutes }}</td>
+			<td>HR: {{ recipe.preparation_hours }} M: {{ recipe.preparation_minutes }}</td>
 			<td>{{ recipe.difficulty }}</td>
 			<td>{{ recipe.meal_time }}</td>
 			<td>{{ recipe.is_healthy }}</td>
+			<td><input type="checkbox" value="{{ recipe.id }}"/></td>
 		</tr>
 		{% endfor %}
 	</tbody>

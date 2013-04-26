@@ -1,7 +1,17 @@
 $( document ).ready( function( ) {
 	get_pantry( );
+	get_shopping_list( );
 	$( '#btn_add_pantry_item' ).click( function( ) {
 		get_item( '/pantry/item/' );
+	} );
+	$( '#btn_checkin_shopping' ).click( function( ) {
+		$.ajax( {
+			type: 'GET',
+			url: '/pantry/shopping/commit/',
+			success: function( result ) {
+				$( '#shopping_list_container' ).html( result );
+			}
+		} );
 	} );
 } ).on( 'submit', '#form_edit_pantry_item', function( event ) {
 	event.preventDefault( );
@@ -29,6 +39,8 @@ $( document ).ready( function( ) {
 	var confirmation = confirm( "Delete this item from pantry?" );
 	if( confirmation == true )
 		delete_item( '/pantry/item/delete/' + $( '#form_edit_pantry_item' ).attr( 'value' ) + '/' );
+} ).on( 'click', '#btn_cancel', function( ) {
+	get_shopping_list( );
 } );
 function get_pantry( ) {
 	$.ajax( {
@@ -36,6 +48,15 @@ function get_pantry( ) {
 		url: '/pantry/contents/',
 		success: function( result ) {
 			$( '#pantry_contents_container' ).html( result );
+		}
+	} );
+}
+function get_shopping_list( ) {
+	$.ajax( {
+		type: 'GET',
+		url: '/pantry/shopping/',
+		success: function( result ) {
+			$( '#shopping_list_container' ).html( result );
 		}
 	} );
 }
