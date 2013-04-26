@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.context_processors import csrf
+from conversions import *
 from forms import *
 
 def cookbook( request ):
@@ -152,4 +153,34 @@ def advanced( request ):
 def fio_forme( request ):
 	if not request.user.is_authenticated( ):
 		return HttpResponseRedirect( '/' )
-	return render_to_response( 'cookbook_contents.html' )
+
+	# get all recipes that we can make with current pantry inventory
+	contents = [ ]
+	recipes = request.user.recipe_set.all( )
+	pantry = request.user.pantryitem_set.all( )
+	for recipe in recipes:
+		add_it = True
+		for ingredient in recipe.ingredient_set.all( ):
+			try:
+				key_1 = ingredient.unit
+				try:
+					key_2 = pantry.get( name=ingredient.name ).unit
+				except:
+					add_it = False
+					break
+
+				if key_1 == key_2:
+					if not ingredient.amount <= pantry.get( name=ingredient.name ).amount:
+						add_it = False
+						break
+				else:
+					if not function_dict[ key_1 ][ key_2 ]( ingredient.amount ) <= pantry.get( name=ingredient.name ).amount:
+						add_it = False
+						break
+			except:
+				pass
+		if add_it == True:
+			contents.append( recipe )
+
+	to_pass = { 'contents': contents }
+	return render_to_response( 'cookbook_contents.html', to_pass )
