@@ -4,14 +4,14 @@ from django.db import models
 # choices
 units = (
 	( '', 'Units' ),
-	( 'tbsp', 'tablespoon' ),
 	( 'tsp', 'teaspoon' ),
+	( 'tbsp', 'tablespoon' ),
 	( 'c', 'cup' ),
-	( 'fl oz', 'fluid ounces' ),
+	( 'fl oz', 'fluid ounce' ),
 	( 'pt', 'pint' ),
 	( 'qt', 'quart' ),
 	( 'gal', 'gallon' ),
-	( 'oz', 'ounces' ),
+	( 'oz', 'ounce' ),
 	( 'lb', 'pound' ),
 	( 'whole', 'whole item' ),
 )
